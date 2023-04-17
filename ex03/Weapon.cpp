@@ -3,12 +3,12 @@
 
 Weapon::Weapon(std::string type) : type_(type)
 {
-	std::cout << "Weapon " << this->type_ << "created" << std::endl;
+	std::cout << "Weapon " << this->type_ << " created" << std::endl;
 }
 
 Weapon::~Weapon(void)
 {
-	std::cout << "Weapon " << this->type_ << "destroyed" << std::endl;
+	std::cout << "Weapon " << this->type_ << " destroyed" << std::endl;
 }
 
 const std::string& Weapon::getType(void)
