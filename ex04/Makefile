@@ -1,7 +1,7 @@
 NAME		=	change_words
 SRCS		=	main.cpp Replace.cpp
 OBJS		=	$(SRCS:.cpp=.o)
-HEADERS		=	
+HEADERS		=	Replace.hpp
 
 CXX		=	c++
 CXXFLAGS	=	-Werror -Wall -Wextra -std=c++98
