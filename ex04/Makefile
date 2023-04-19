@@ -1,4 +1,4 @@
-NAME		=	change_words
+NAME		=	replace
 SRCS		=	main.cpp Replace.cpp
 OBJS		=	$(SRCS:.cpp=.o)
 HEADERS		=	Replace.hpp

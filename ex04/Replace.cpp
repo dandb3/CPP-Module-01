@@ -2,6 +2,7 @@
 #include "Replace.hpp"
 
 Replace::Replace(void) {}
+
 Replace::~Replace(void)
 {
 	if (this->inputFile_.is_open())
@@ -12,12 +13,12 @@ Replace::~Replace(void)
 
 void Replace::setInputFile(std::string inputFilename)
 {
-	this->inputFile_.open(inputFilename);
+	this->inputFile_.open(inputFilename.c_str());
 }
 
 void Replace::setOutputFile(std::string outputFilename)
 {
-	this->outputFile_.open(outputFilename, std::ofstream::out | std::ofstream::trunc);
+	this->outputFile_.open(outputFilename.c_str(), std::ofstream::out | std::ofstream::trunc);
 }
 
 bool Replace::inputIsOpen(void)
@@ -40,21 +41,29 @@ bool Replace::outputFail(void)
 	return this->outputFile_.fail();
 }
 
-void Replace::readFile(void)
-{
-	this->inputFile_.get(this->buf_);
-}
-
 void Replace::replace(std::string target, std::string change)
 {
 	std::string inputStr;
+	std::size_t fileSize;
 	std::size_t targetPos;
+	char* buffer;
 
-	inputStr = this->buf_.str();
+	this->inputFile_.seekg(0, std::ios_base::end);
+	fileSize = this->inputFile_.tellg();
+	this->inputFile_.seekg(0, std::ios_base::beg);
+	buffer = new char[fileSize + 1];
+	this->inputFile_.read(buffer, fileSize);
+	if (this->inputFile_.bad()) {
+		delete[] buffer;
+		return;
+	}
+	buffer[fileSize] = '\0';
+	inputStr = std::string(buffer);
+	delete[] buffer;
 	while ((targetPos = inputStr.find(target)) != std::string::npos) {
 		this->outputFile_ << inputStr.substr(0, targetPos) << change;
-		if (this->outputFail())
-			return ;
+		if (this->outputFile_.fail())
+			return;
 		inputStr = inputStr.substr(targetPos + target.size(), std::string::npos);
 	}
 	this->outputFile_ << inputStr;

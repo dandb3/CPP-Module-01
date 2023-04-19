@@ -2,7 +2,7 @@
 #include <iostream>
 #include "Replace.hpp"
 
-bool replaceWords(char *argv[])
+static bool replaceWords(char *argv[])
 {
 	Replace replaceTool;
 
@@ -16,13 +16,12 @@ bool replaceWords(char *argv[])
 		std::cerr << "File open error" << std::endl;
 		return (false);
 	}
-	replaceTool.readFile();
+	replaceTool.replace(argv[2], argv[3]);
 	if (replaceTool.inputFail()) {
 		std::cerr << "Read failed" << std::endl;
 		return (false);
 	}
-	replaceTool.replace(argv[2], argv[3]);
-	if (replaceTool.outputFail()) {
+	else if (replaceTool.outputFail()) {
 		std::cerr << "Replace failed" << std::endl;
 		return (false);
 	}
