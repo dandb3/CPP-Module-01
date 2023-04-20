@@ -17,12 +17,8 @@ static bool replaceWords(char *argv[])
 		return (false);
 	}
 	replaceTool.replace(argv[2], argv[3]);
-	if (replaceTool.inputFail()) {
-		std::cerr << "Read failed" << std::endl;
-		return (false);
-	}
-	else if (replaceTool.outputFail()) {
-		std::cerr << "Replace failed" << std::endl;
+	if (replaceTool.fail()) {
+		std::cerr << "Replace error" << std::endl;
 		return (false);
 	}
 	return (true);
