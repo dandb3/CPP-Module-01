@@ -1,5 +1,4 @@
 #include <iostream>
-#include <sstream>
 #include "Replace.hpp"
 
 void Replace::setInputFile(std::string inputFilename)
