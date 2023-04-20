@@ -4,7 +4,7 @@ OBJS		=	$(SRCS:.cpp=.o)
 HEADERS		=	Harl.hpp
 
 CXX		=	c++
-CXXFLAGS	=	#-Werror -Wall -Wextra -std=c++98
+CXXFLAGS	=	-Werror -Wall -Wextra -std=c++98
 RM		=	rm
 RMFLAGS		=	-rf
 

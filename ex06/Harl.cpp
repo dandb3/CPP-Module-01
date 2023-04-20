@@ -47,10 +47,13 @@ void Harl::complain(std::string level)
 	switch (idx) {
 	case 0:
 		(this->*msg_[0])();
+		__attribute__((fallthrough));
 	case 1:
 		(this->*msg_[1])();
+		__attribute__((fallthrough));
 	case 2:
 		(this->*msg_[2])();
+		__attribute__((fallthrough));
 	case 3:
 		(this->*msg_[3])();
 		break;
