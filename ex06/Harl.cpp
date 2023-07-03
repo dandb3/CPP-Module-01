@@ -3,14 +3,14 @@
 
 Harl::Harl(void)
 {
-	msg_[0] = &Harl::debug;
-	msg_[1] = &Harl::info;
-	msg_[2] = &Harl::warning;
-	msg_[3] = &Harl::error;
-	commands_[0] = "DEBUG";
-	commands_[1] = "INFO";
-	commands_[2] = "WARNING";
-	commands_[3] = "ERROR";
+	_msg[0] = &Harl::debug;
+	_msg[1] = &Harl::info;
+	_msg[2] = &Harl::warning;
+	_msg[3] = &Harl::error;
+	_commands[0] = "DEBUG";
+	_commands[1] = "INFO";
+	_commands[2] = "WARNING";
+	_commands[3] = "ERROR";
 }
 
 void Harl::debug(void)
@@ -42,20 +42,20 @@ void Harl::complain(std::string level)
 	int idx = 0;
 
 	for (; idx < 4; ++idx)
-		if (level == this->commands_[idx])
+		if (level == this->_commands[idx])
 			break;
 	switch (idx) {
 	case 0:
-		(this->*msg_[0])();
+		(this->*_msg[0])();
 		__attribute__((fallthrough));
 	case 1:
-		(this->*msg_[1])();
+		(this->*_msg[1])();
 		__attribute__((fallthrough));
 	case 2:
-		(this->*msg_[2])();
+		(this->*_msg[2])();
 		__attribute__((fallthrough));
 	case 3:
-		(this->*msg_[3])();
+		(this->*_msg[3])();
 		break;
 	default:
 		std::cout << "[ Probably complaining about insignificant problems ]\n" << std::endl;

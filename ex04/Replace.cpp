@@ -3,27 +3,27 @@
 
 void Replace::setInputFile(std::string inputFilename)
 {
-	this->inputFile_.open(inputFilename.c_str());
+	this->_inputFile.open(inputFilename.c_str());
 }
 
 void Replace::setOutputFile(std::string outputFilename)
 {
-	this->outputFile_.open(outputFilename.c_str(), std::ofstream::out | std::ofstream::trunc);
+	this->_outputFile.open(outputFilename.c_str(), std::ofstream::out | std::ofstream::trunc);
 }
 
 bool Replace::inputIsOpen(void)
 {
-	return this->inputFile_.is_open();
+	return this->_inputFile.is_open();
 }
 
 bool Replace::outputIsOpen(void)
 {
-	return this->outputFile_.is_open();
+	return this->_outputFile.is_open();
 }
 
-bool Replace::fail(void)
+bool Replace::bad(void)
 {
-	if (this->inputFile_.fail() || this->outputFile_.fail() || this->oss_.fail())
+	if (this->_inputFile.bad() || this->_outputFile.bad() || this->_oss.bad())
 		return true;
 	return false;
 }
@@ -33,15 +33,15 @@ void Replace::replace(std::string target, std::string change)
 	std::string inputStr;
 	std::size_t targetPos;
 
-	this->oss_ << this->inputFile_.rdbuf();
-	if (this->oss_.fail() || this->inputFile_.fail())
+	this->_oss << this->_inputFile.rdbuf();
+	if (this->_oss.bad())
 		return;
-	inputStr = this->oss_.str();
+	inputStr = this->_oss.str();
 	while ((targetPos = inputStr.find(target)) != std::string::npos) {
-		this->outputFile_ << inputStr.substr(0, targetPos) << change;
-		if (this->outputFile_.fail())
+		this->_outputFile << inputStr.substr(0, targetPos) << change;
+		if (this->_outputFile.bad())
 			return;
 		inputStr = inputStr.substr(targetPos + target.size(), std::string::npos);
 	}
-	this->outputFile_ << inputStr;
+	this->_outputFile << inputStr;
 }

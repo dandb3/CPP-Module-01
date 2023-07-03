@@ -7,9 +7,9 @@
 class Replace
 {
 private:
-	std::ifstream inputFile_;
-	std::ofstream outputFile_;
-	std::ostringstream oss_;
+	std::ifstream _inputFile;
+	std::ofstream _outputFile;
+	std::ostringstream _oss;
 
 public:
 	void setInputFile(std::string inputFilename);
@@ -17,7 +17,7 @@ public:
 
 	bool inputIsOpen(void);
 	bool outputIsOpen(void);
-	bool fail(void);
+	bool bad(void);
 	void replace(std::string target, std::string change);
 };
 

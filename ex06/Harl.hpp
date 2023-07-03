@@ -6,8 +6,8 @@
 class Harl
 {
 private:
-	std::string commands_[4];
-	void (Harl::*msg_[4])(void);
+	std::string _commands[4];
+	void (Harl::*_msg[4])(void);
 
 	void debug(void);
 	void info(void);

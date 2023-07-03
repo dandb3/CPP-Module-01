@@ -12,7 +12,7 @@ int main(void)
 	std::cout << "Address of string reference: " << &stringREF << std::endl;
 	
 	std::cout << "Value of string object: " << msg << '\n';
-	std::cout << "Value of string pointer: " << *stringPTR << '\n';
+	std::cout << "Value of string pointer: " << stringPTR << '\n';
 	std::cout << "Value of string reference: " << stringREF << std::endl;
 
 	return 0;

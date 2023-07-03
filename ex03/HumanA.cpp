@@ -1,17 +1,17 @@
 #include <iostream>
 #include "HumanA.hpp"
 
-HumanA::HumanA(std::string name, Weapon& weapon) : weapon_(weapon), name_(name)
+HumanA::HumanA(std::string name, Weapon& weapon) : _weapon(weapon), _name(name)
 {
-	std::cout << "HumanA " << this->name_ << " created" << std::endl;
+	std::cout << "HumanA " << this->_name << " created" << std::endl;
 }
 
 HumanA::~HumanA(void)
 {
-	std::cout << "HumanA " << this->name_ << " destroyed" << std::endl;
+	std::cout << "HumanA " << this->_name << " destroyed" << std::endl;
 }
 
 void HumanA::attack(void)
 {
-	std::cout << this->name_ << " attacks with their " << this->weapon_.getType() << std::endl;
+	std::cout << this->_name << " attacks with their " << this->_weapon.getType() << std::endl;
 }

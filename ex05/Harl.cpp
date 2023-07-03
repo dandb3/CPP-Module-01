@@ -3,14 +3,14 @@
 
 Harl::Harl(void)
 {
-	msg_[0] = &Harl::debug;
-	msg_[1] = &Harl::info;
-	msg_[2] = &Harl::warning;
-	msg_[3] = &Harl::error;
-	commands_[0] = "DEBUG";
-	commands_[1] = "INFO";
-	commands_[2] = "WARNING";
-	commands_[3] = "ERROR";
+	_msg[0] = &Harl::debug;
+	_msg[1] = &Harl::info;
+	_msg[2] = &Harl::warning;
+	_msg[3] = &Harl::error;
+	_commands[0] = "DEBUG";
+	_commands[1] = "INFO";
+	_commands[2] = "WARNING";
+	_commands[3] = "ERROR";
 }
 
 void Harl::debug(void)
@@ -40,8 +40,8 @@ void Harl::error(void)
 void Harl::complain(std::string level)
 {
 	for (int i = 0; i < 4; ++i) {
-		if (level == this->commands_[i]) {
-			(this->*msg_[i])();
+		if (level == this->_commands[i]) {
+			(this->*_msg[i])();
 			return;
 		}
 	}
