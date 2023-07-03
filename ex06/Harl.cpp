@@ -13,6 +13,8 @@ Harl::Harl(void)
 	_commands[3] = "ERROR";
 }
 
+Harl::~Harl(void) {}
+
 void Harl::debug(void)
 {
 	std::cout << "[ DEBUG ]\n";
