@@ -21,9 +21,9 @@ bool Replace::outputIsOpen(void)
 	return this->_outputFile.is_open();
 }
 
-bool Replace::bad(void)
+bool Replace::good(void)
 {
-	if (this->_inputFile.bad() || this->_outputFile.bad() || this->_oss.bad())
+	if (this->_inputFile.good() && this->_outputFile.good() && !this->_oss.bad())
 		return true;
 	return false;
 }
@@ -31,17 +31,15 @@ bool Replace::bad(void)
 void Replace::replace(std::string target, std::string change)
 {
 	std::string inputStr;
-	std::size_t targetPos;
+	std::size_t targetPos = 0;
 
 	this->_oss << this->_inputFile.rdbuf();
 	if (this->_oss.bad())
 		return;
 	inputStr = this->_oss.str();
-	while ((targetPos = inputStr.find(target)) != std::string::npos) {
-		this->_outputFile << inputStr.substr(0, targetPos) << change;
-		if (this->_outputFile.bad())
-			return;
-		inputStr = inputStr.substr(targetPos + target.size(), std::string::npos);
+	while ((targetPos = inputStr.find(target, targetPos)) != std::string::npos) {
+		inputStr.replace(targetPos, target.size(), change);
+		targetPos += change.size();
 	}
 	this->_outputFile << inputStr;
 }

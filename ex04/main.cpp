@@ -20,7 +20,7 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 	replaceTool.replace(argv[2], argv[3]);
-	if (replaceTool.bad()) {
+	if (!replaceTool.good()) {
 		std::cerr << "Error: replacement failed" << std::endl;
 		return 1;
 	}

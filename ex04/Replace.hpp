@@ -17,7 +17,7 @@ public:
 
 	bool inputIsOpen(void);
 	bool outputIsOpen(void);
-	bool bad(void);
+	bool good(void);
 	void replace(std::string target, std::string change);
 };
 
